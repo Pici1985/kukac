@@ -1,5 +1,5 @@
 
-let days = 88;
+let days = 108;
 let felnottkukac = 2;
 let gyerekkukac = 0; 
 
@@ -17,10 +17,10 @@ function calculate(days, felnottkukac, gyerekkukac){
 
     if(days <= 87 ){
         felnottkukac = 2;
-        gyerekkukac = (generaciokszama * 2.7)
+        gyerekkukac = Math.floor(generaciokszama * 2.7)
     } else {
-        gyerekkukac = (( generaciokszama * 2.7 ) * napiszorzo ) * hanyadikfelnoves;
-        felnottkukac = felnottkukac + ((napiszorzo * 2) * hanyadikfelnoves); 
+        gyerekkukac = Math.floor(( generaciokszama * 2.7 ) * napiszorzo ) * hanyadikfelnoves;
+        felnottkukac = Math.floor(felnottkukac + ((napiszorzo * 2.7) * hanyadikfelnoves)); 
     } 
 
     console.log(`A ${days}. napon a felnott kukacok szama ${felnottkukac}, a gyerekkukacok szama ${gyerekkukac}!`);
