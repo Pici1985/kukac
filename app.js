@@ -1,25 +1,27 @@
 
-let days = 365;
-let felnottkukac = 2;
-let peteszam = felnottkukac * 2.7;
-let gyerekkukac = 0; 
+// let days = 175;
+// let felnottkukac = 2;
+// let peteszam = felnottkukac * 2.7;
+// let gyerekkukac = 0; 
 
-function calculate(days, felnottkukac){
-    if(days > 90 && days < 174  ){
-        let newfelnottkukac = Math.floor(felnottkukac + ((days - 90) * peteszam)); 
-        let newgyerekkukac = (days / 3) * peteszam;  
-        console.log(`A ${days}. napon a felnott kukacok szama ${newfelnottkukac} es gyerekkukakcok szama ${newgyerekkukac}!`);
-    } else if(days >= 174 ){
-        let iteracioszama = (days - 90) / 3; 
-        let newfelnottkukac2 = Math.floor(felnottkukac + ((days - 90) * peteszam) + (iteracioszama * peteszam)); 
-        let newgyerekkukac2 = Math.floor(((days / 3) * peteszam) * (iteracioszama * peteszam));
-        console.log(`A ${days}. napon a felnott kukacok szama ${newfelnottkukac2} es gyerekkukakcok szama ${newgyerekkukac2}!`);
-    }else{
-        console.log("anyad");
-    }
-}
+// function calculate(days, felnottkukac){
+//     if(days > 90 && days < 174  ){
+//         let newfelnottkukac = Math.floor(felnottkukac + ((days - 90) * peteszam)); 
+//         let newgyerekkukac = (days / 3) * peteszam;  
+//         console.log(`A ${days}. napon a felnott kukacok szama ${newfelnottkukac} es gyerekkukakcok szama ${newgyerekkukac}!`);
+//     } else if(days >= 174 ){
+//         let iteracioszama = (days - 90) / 3; 
+//         let newfelnottkukac2 = Math.floor(felnottkukac + ((days - 90) * peteszam) + (iteracioszama * peteszam)); 
+//         let newgyerekkukac2 = Math.floor(((days / 3) * peteszam) + (iteracioszama * peteszam));
+//         console.log(`A ${days}. napon a felnott kukacok szama ${newfelnottkukac2} es gyerekkukakcok szama ${newgyerekkukac2}!`);
+//     }else{
+//         console.log("anyad");
+//     }
+// }
 
-calculate(days, felnottkukac);
+// for(let i = 91; i < days; i++){
+//     calculate(i, felnottkukac);
+// }
 
 // a 87 napig 2 felnott kukac van
 // a 90. napon 2 + 6
@@ -28,33 +30,34 @@ calculate(days, felnottkukac);
 // a 93. napon (((2 + 6) + 6) + 6 ) + 6
 // a 174. nap utan (((2 + 6) + 6) + 6 ) + 6   
 
+const daysToMature = 87; 
 
 
-// function calculate(days, felnottkukac, gyerekkukac){
-    
-//     let hanyadikfelnoves = Math.ceil(days / 87);
-    
-//     console.log(hanyadikfelnoves);
 
-//     let napiszorzo = Math.ceil((days - 87) / 3);
-    
-//     console.log(napiszorzo);
-    
-//     let generaciokszama = Math.floor(days / 3); 
+function calculate(){  
+    let days = document.getElementById('days').value;
+    let startingAdults = document.getElementById('adults').value;
 
-//     if(days <= 87 ){
-//         felnottkukac = 2;
-//         gyerekkukac = Math.floor(generaciokszama * 2.7)
-//     } else {
-//         gyerekkukac = Math.floor(( generaciokszama * 2.7 ) * napiszorzo ) * hanyadikfelnoves;
-//         felnottkukac = Math.floor(felnottkukac + ((napiszorzo * 2.7) * hanyadikfelnoves)); 
-//     } 
+    let actualYoungs = 0;
+    let actualAdults = startingAdults;
 
-//     console.log(`A ${days}. napon a felnott kukacok szama ${felnottkukac}, a gyerekkukacok szama ${gyerekkukac}!`);
-// }
+    for(let i = 0; i <= days; i++ ){
+        if((i % 3) == 0 && i < daysToMature){
+            actualYoungs = Math.floor(actualYoungs + ( startingAdults * 2.7 ))
+        }else if((i % 3) == 0 && i > daysToMature && i < (daysToMature * 2)){
+            actualYoungs = Math.floor(actualYoungs + ( startingAdults * 2.7 ) + (startingAdults * 2.7)) 
+            actualAdults = Math.floor((( i - daysToMature ) * (startingAdults)))
+        } else if((i % 3) == 0 && i > (daysToMature * 2) && i < (daysToMature * 3)){
+            // ha ez a ket sor helyes az egesz muvelet helyes
+            actualYoungs = Math.floor(actualYoungs + ( startingAdults * 2.7 ) + (startingAdults * 2.7) + (startingAdults * 2.7)) 
+            actualAdults = Math.floor((( i - daysToMature ) * (startingAdults)) + (( i - daysToMature ) * (startingAdults)))
+        } else if((i % 3) == 0 && i > (daysToMature * 3) && i < (daysToMature * 4)){
+            actualYoungs = Math.floor(actualYoungs + ( startingAdults * 2.7 ) + (startingAdults * 2.7) + (startingAdults * 2.7) + (startingAdults * 2.7) + (startingAdults * 2.7)) 
+            actualAdults = Math.floor((( i - daysToMature ) * (startingAdults)) + (( i - daysToMature ) * (startingAdults)) + (( i - daysToMature ) * (startingAdults)))
+        } 
+    }
+    console.log(`nr of youngs: ${actualYoungs}, nr of adults ${actualAdults}!`)   
+}
+
+// calculate(days, startingAdults);
    
-
-// calculate(days, felnottkukac, gyerekkukac);
-
-// ez tuti nem jo igy mert pl a ha a napokat elkezded betenni 261-tol folfele akkor latszik hogy a felnottek szmaanak a 
-// tuti nem helyes egyik nap ugrik 160at utana meg csak egyet kettot :) Szal valami tuti nem jo :) 

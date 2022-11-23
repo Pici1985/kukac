@@ -1,3 +1,20 @@
 body {
     background: grey;
 }
+
+.wrapper {
+    display: grid;
+    width: 200px;
+}
+
+input{
+    margin: 5px;
+}
+
+label {
+    margin: 5px;
+}
+
+button {
+    margin: 5px;
+}
